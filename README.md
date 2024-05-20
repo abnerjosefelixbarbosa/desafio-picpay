@@ -18,3 +18,8 @@ Desafio simplificado picpay.
 # Backend
 
 ## API
+
+## Tecnologias
+
+- java 17
+- lombok
