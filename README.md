@@ -17,9 +17,10 @@ Desafio simplificado picpay.
 
 # Backend
 
-## API
-
 ## Tecnologias
 
-- java 17
-- lombok
+- Java 17.
+- Lombok.
+- SOLID.
+- MVC.
+- H2 DataBase.
