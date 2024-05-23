@@ -2,8 +2,14 @@ package com.org.backendjava.model.entity;
 
 import java.io.Serializable;
 
+import org.springframework.beans.BeanUtils;
+
+import com.org.backendjava.model.dto.UserCreateDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,14 +29,19 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "full_Name")
+	@Column(name = "full_Name", nullable = false)
 	private String fullName;
-	@Column(name = "docment", unique = true)
+	@Column(name = "docment", unique = true, nullable = false)
 	private String docment;
-	@Column(name = "email", unique = true)
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
-	@Column(name = "password", unique = true)
+	@Column(name = "password", unique = true, nullable = false)
 	private String password;
-	@Column(name = "type_user")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type_user", nullable = false)
 	private TypeUser typeUser;
+	
+	public User(UserCreateDTO dto) {
+		BeanUtils.copyProperties(dto, this);
+	}
 }

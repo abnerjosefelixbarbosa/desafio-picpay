@@ -12,18 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.org.backendjava.model.dto.TransferenceDTO;
 import com.org.backendjava.service.ITransferenceService;
 
-import jakarta.validation.Valid;
-
 @RestController
-@RequestMapping("/api/transfer")
-public class TransferController {
+@RequestMapping("/api/transferences")
+public class TransferenceController {
 	@Autowired
-	private ITransferenceService service;
+	private ITransferenceService transferenceService;
 	
 	@PostMapping("/transfer-value")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Void> transferValue(@Valid @RequestBody TransferenceDTO dto) {
-		service.transferValue(dto);
-		return ResponseEntity.status(204).body(null);
+	public ResponseEntity<?> transferValue(@RequestBody TransferenceDTO dto) {
+		transferenceService.transferValue(dto);
+		return ResponseEntity.status(200).body(null);
 	}
 }
