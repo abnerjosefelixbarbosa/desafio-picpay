@@ -1,13 +1,24 @@
 package com.org.backendjava.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.org.backendjava.model.entity.User;
 import com.org.backendjava.repository.UserRepository;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
-@AllArgsConstructor
 public class UserService implements IUserService {
-	private final UserRepository repository;
+	@Autowired
+	private UserRepository userRepository;
+	
+	public User saveUser(User user) {
+		return userRepository.save(user);
+	}
+	
+	public User findById(Long id) {
+		return userRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("user not found"));
+	}
 }

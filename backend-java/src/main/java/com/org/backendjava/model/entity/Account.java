@@ -2,7 +2,6 @@ package com.org.backendjava.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,24 +16,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "transfer_tb")
+@Table(name = "account_tb")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transfer implements Serializable {
+public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "date_time")
-	private LocalDateTime dateTime;
-	@Column(name = "value_transfer")
-	private BigDecimal value;
+	@Column(name = "account")
+	private String account;
+	@Column(name = "agence")
+	private String agence;
+	@Column(name = "balance")
+	private BigDecimal balance;
 	@ManyToOne
-	@JoinColumn(name = "payer_id")
-	private User payer;
-	@ManyToOne
-	@JoinColumn(name = "payee_id")
-	private User payee;
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	public void subtractBalance(BigDecimal value) {
+		balance.subtract(value);
+	}
+	
+	public void addBalance(BigDecimal value) {
+		balance.add(value);
+	}
 }
