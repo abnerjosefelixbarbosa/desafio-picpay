@@ -24,3 +24,5 @@ Desafio simplificado picpay.
 - SOLID.
 - MVC.
 - H2 DataBase.
+- Swwgger.
+- Validation.
