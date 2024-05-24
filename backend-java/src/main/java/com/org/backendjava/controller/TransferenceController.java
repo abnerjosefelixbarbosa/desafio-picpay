@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.org.backendjava.model.dto.TransferenceDTO;
-import com.org.backendjava.service.ITransferenceService;
+import com.org.backendjava.service.interfaces.ITransferenceService;
 
 @RestController
 @RequestMapping("/api/transferences")

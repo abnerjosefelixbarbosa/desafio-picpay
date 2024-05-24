@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 import com.org.backendjava.model.dto.TransferenceDTO;
 import com.org.backendjava.model.entity.Account;
 import com.org.backendjava.model.entity.Transference;
-import com.org.backendjava.model.entity.TypeUser;
 import com.org.backendjava.model.entity.User;
+import com.org.backendjava.model.enums.TypeUser;
 import com.org.backendjava.repository.TransferenceRepository;
+import com.org.backendjava.service.interfaces.IAccountService;
+import com.org.backendjava.service.interfaces.ITransferenceService;
+import com.org.backendjava.service.interfaces.IUserService;
 
 import jakarta.transaction.Transactional;
 

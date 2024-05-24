@@ -1,9 +1,9 @@
 package com.org.backendjava.model.dto;
 
-import com.org.backendjava.model.entity.TypeUser;
 import com.org.backendjava.model.entity.User;
+import com.org.backendjava.model.enums.TypeUser;
 
-public record UserCreateView(
+public record CreateUserView(
 		Long id,
 		String fullName,
 		String docment,
@@ -11,7 +11,7 @@ public record UserCreateView(
 		String password,
 		TypeUser typeUser
 ) {
-	public UserCreateView(User user) {
+	public CreateUserView(User user) {
 		this(
 			user.getId(),
 			user.getFullName(),

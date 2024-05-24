@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.org.backendjava.model.dto.UserCreateDTO;
-import com.org.backendjava.model.dto.UserCreateView;
-import com.org.backendjava.service.IUserService;
+import com.org.backendjava.model.dto.CreateUserDTO;
+import com.org.backendjava.model.dto.CreateUserView;
+import com.org.backendjava.service.interfaces.IUserService;
 
 @RestController
 @RequestMapping("/api/users")
@@ -21,8 +21,8 @@ public class UserController {
 	
 	@PostMapping("create-user")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<UserCreateView> createUser(@RequestBody UserCreateDTO dto) {
-		UserCreateView view = userService.createUser(dto);
+	public ResponseEntity<?> createUser(@RequestBody CreateUserDTO dto) {
+		CreateUserView view = userService.createUser(dto);
 		return ResponseEntity.status(201).body(view);
 	}
 }

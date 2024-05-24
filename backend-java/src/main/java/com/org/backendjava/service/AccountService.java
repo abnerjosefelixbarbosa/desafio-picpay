@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.org.backendjava.model.entity.Account;
 import com.org.backendjava.model.entity.User;
 import com.org.backendjava.repository.AccountRepository;
+import com.org.backendjava.service.interfaces.IAccountService;
 
 import jakarta.persistence.EntityNotFoundException;
 

@@ -1,4 +1,4 @@
-package com.org.backendjava.model.entity;
+package com.org.backendjava.model.enums;
 
 public enum TypeUser {
     COMMOM, SHOPKEEPER

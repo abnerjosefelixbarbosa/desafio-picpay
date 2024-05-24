@@ -1,4 +1,4 @@
-package com.org.backendjava.service;
+package com.org.backendjava.service.interfaces;
 
 import com.org.backendjava.model.entity.Account;
 import com.org.backendjava.model.entity.User;

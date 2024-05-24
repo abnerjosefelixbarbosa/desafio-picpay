@@ -1,4 +1,4 @@
-package com.org.backendjava.exception;
+package com.org.backendjava.controller.exception;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
