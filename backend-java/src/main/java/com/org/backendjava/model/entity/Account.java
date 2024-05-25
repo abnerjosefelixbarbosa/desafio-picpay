@@ -3,6 +3,10 @@ package com.org.backendjava.model.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.springframework.beans.BeanUtils;
+
+import com.org.backendjava.model.dto.CreateAccountDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,15 +30,19 @@ public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "account")
+	@Column(name = "account", nullable = false, unique = true)
 	private String account;
-	@Column(name = "agence")
+	@Column(name = "agence", nullable = false, unique = true)
 	private String agence;
-	@Column(name = "balance")
+	@Column(name = "balance", nullable = false)
 	private BigDecimal balance;
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
+	
+	public Account(CreateAccountDTO dto) {
+		BeanUtils.copyProperties(dto, this);
+	}
 	
 	public void subtractBalance(BigDecimal value) {
 		balance.subtract(value);

@@ -13,6 +13,8 @@ import com.org.backendjava.model.dto.CreateUserDTO;
 import com.org.backendjava.model.dto.CreateUserView;
 import com.org.backendjava.service.interfaces.IUserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -21,7 +23,7 @@ public class UserController {
 	
 	@PostMapping("create-user")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> createUser(@RequestBody CreateUserDTO dto) {
+	public ResponseEntity<CreateUserView> createUser(@Valid @RequestBody CreateUserDTO dto) {
 		CreateUserView view = userService.createUser(dto);
 		return ResponseEntity.status(201).body(view);
 	}

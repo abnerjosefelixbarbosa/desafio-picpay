@@ -20,6 +20,7 @@ public class UserService implements IUserService {
 	@Transactional
 	public CreateUserView createUser(CreateUserDTO dto) {
 		User user = new User(dto);
+		validateCreateUser(user);
 		user = saveUser(user);
 		CreateUserView view = new CreateUserView(user);
 		return view;
@@ -34,7 +35,17 @@ public class UserService implements IUserService {
 				.orElseThrow(() -> new EntityNotFoundException("user not found"));
 	}
 	
-	private void valitate(User user) {
+	private void validateCreateUser(User user) {
+		boolean result = false;
+		result = userRepository.existsByEmail(user.getEmail());
+		if (result)
+			throw new RuntimeException("email exists");
+		result = userRepository.existsByDocment(user.getDocment());
+		if (result)
+			throw new RuntimeException("docment exists");
+		result = userRepository.existsByPassword(user.getPassword());
+		if (result)
+		    throw new RuntimeException("password exists");
 		
 	}
 }
