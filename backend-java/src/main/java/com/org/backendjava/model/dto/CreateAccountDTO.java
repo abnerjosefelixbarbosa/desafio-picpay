@@ -16,6 +16,8 @@ public record CreateAccountDTO(
 		@NotNull(message = "balance invalid")
 		@Digits(fraction = 2, integer = 38, message = "balance invalid")
 		BigDecimal balance,
-		@NotNull(message = "user invalid")
-		Object user
+		@NotNull(message = "user id invalid")
+		Long userId,
+		@NotNull(message = "user docment invalid")
+		String userDocment
 ) {}

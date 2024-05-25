@@ -13,6 +13,8 @@ import com.org.backendjava.model.dto.CreateAccountDTO;
 import com.org.backendjava.model.dto.CreateAccountView;
 import com.org.backendjava.service.interfaces.IAccountService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
@@ -21,7 +23,7 @@ public class AccountController {
 	
 	@PostMapping("create-account")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<CreateAccountView> createAccount(@RequestBody CreateAccountDTO dto) {
+	public ResponseEntity<CreateAccountView> createAccount(@Valid @RequestBody CreateAccountDTO dto) {
 		CreateAccountView view = service.createAccount(dto);
 		return ResponseEntity.status(201).body(view);
 	}

@@ -41,6 +41,10 @@ public class Account implements Serializable {
 	private User user;
 	
 	public Account(CreateAccountDTO dto) {
+		User user = new User();
+		user.setId(dto.userId());
+		user.setDocment(dto.account());
+		this.user = user;
 		BeanUtils.copyProperties(dto, this);
 	}
 	
