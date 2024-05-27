@@ -1,4 +1,4 @@
-package com.org.backendjava.controller.exception;
+package com.org.backendjava.exception;
 
 import java.time.LocalDateTime;
 

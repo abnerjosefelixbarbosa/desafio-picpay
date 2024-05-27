@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.BeanUtils;
 
-import com.org.backendjava.model.dto.CreateAccountDTO;
+import com.org.backendjava.model.dto.CreateWalletDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,26 +24,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account implements Serializable {
+public class Wallet implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "account", nullable = false, unique = true)
-	private String account;
-	@Column(name = "agence", nullable = false, unique = true)
-	private String agence;
-	@Column(name = "balance", nullable = false)
+    @Column(name = "balance", nullable = false)
 	private BigDecimal balance;
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
-	public Account(CreateAccountDTO dto) {
+	public Wallet(CreateWalletDTO dto) {
 		User user = new User();
 		user.setId(dto.userId());
-		user.setDocment(dto.account());
+		user.setDocment(dto.userDocment());
 		this.user = user;
 		BeanUtils.copyProperties(dto, this);
 	}

@@ -1,4 +1,4 @@
-package com.org.backendjava.service.interfaces;
+package com.org.backendjava.interfaces;
 
 import com.org.backendjava.model.dto.TransferenceDTO;
 

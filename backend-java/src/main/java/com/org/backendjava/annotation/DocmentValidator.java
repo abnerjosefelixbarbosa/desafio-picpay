@@ -1,4 +1,4 @@
-package com.org.backendjava.model.annotation;
+package com.org.backendjava.annotation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

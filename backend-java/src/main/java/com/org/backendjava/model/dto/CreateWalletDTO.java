@@ -2,22 +2,18 @@ package com.org.backendjava.model.dto;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.constraints.Digits;
+import com.org.backendjava.annotation.Docment;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public record CreateAccountDTO(
-		@NotNull(message = "account invalid")
-		@NotEmpty(message = "account invalid")
-		String account,
-		@NotNull(message = "agence invalid")
-		@NotEmpty(message = "agence invalid")
-		String agence,
+public record CreateWalletDTO(
 		@NotNull(message = "balance invalid")
-		@Digits(fraction = 2, integer = 38, message = "balance invalid")
 		BigDecimal balance,
 		@NotNull(message = "user id invalid")
 		Long userId,
+		@NotEmpty(message = "user docment invalid")
 		@NotNull(message = "user docment invalid")
+		@Docment(message = "user docment invalid")
 		String userDocment
 ) {}

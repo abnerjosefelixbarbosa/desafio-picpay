@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.org.backendjava.model.dto.CreateAccountDTO;
-import com.org.backendjava.model.dto.CreateAccountView;
-import com.org.backendjava.service.interfaces.IAccountService;
+import com.org.backendjava.interfaces.IWalletService;
+import com.org.backendjava.model.dto.CreateWalletDTO;
+import com.org.backendjava.model.dto.CreateWalletView;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/accounts")
-public class AccountController {
+public class WalletController {
 	@Autowired
-	private IAccountService service; 
+	private IWalletService walletService; 
 	
-	@PostMapping("create-account")
+	@PostMapping("create-wallet")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<CreateAccountView> createAccount(@Valid @RequestBody CreateAccountDTO dto) {
-		CreateAccountView view = service.createAccount(dto);
+	public ResponseEntity<CreateWalletView> createWallet(@Valid @RequestBody CreateWalletDTO dto) {
+		CreateWalletView view = walletService.createWallet(dto);
 		return ResponseEntity.status(201).body(view);
 	}
 }

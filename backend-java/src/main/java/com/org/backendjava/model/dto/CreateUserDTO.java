@@ -1,6 +1,6 @@
 package com.org.backendjava.model.dto;
 
-import com.org.backendjava.model.annotation.Docment;
+import com.org.backendjava.annotation.Docment;
 import com.org.backendjava.model.enums.TypeUser;
 
 import jakarta.validation.constraints.Email;
@@ -25,13 +25,3 @@ public record CreateUserDTO(
 		@NotNull(message = "type user invalid")
 		TypeUser typeUser
 ) {}
-
-/*
-{
-  "fullName": "Miguel",
-  "docment": "018.811.720-23",
-  "email": "mil@gmail.com",
-  "password": "12256",
-  "typeUser": "COMMOM"
-}
-*/

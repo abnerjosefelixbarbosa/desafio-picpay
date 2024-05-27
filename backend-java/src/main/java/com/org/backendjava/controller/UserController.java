@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.org.backendjava.interfaces.IUserService;
 import com.org.backendjava.model.dto.CreateUserDTO;
 import com.org.backendjava.model.dto.CreateUserView;
-import com.org.backendjava.service.interfaces.IUserService;
 
 import jakarta.validation.Valid;
 

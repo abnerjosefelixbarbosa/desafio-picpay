@@ -1,4 +1,4 @@
-package com.org.backendjava.model.annotation;
+package com.org.backendjava.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
