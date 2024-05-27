@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "account_tb")
+@Table(name = "wallet_tb")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.org.backendjava.interfaces.ITransferenceService;
-import com.org.backendjava.model.dto.TransferenceDTO;
+import com.org.backendjava.model.dto.TransferValueDTO;
+import com.org.backendjava.model.dto.TransferValueView;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/transferences")
@@ -20,8 +23,8 @@ public class TransferenceController {
 	
 	@PostMapping("/transfer-value")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> transferValue(@RequestBody TransferenceDTO dto) {
-		transferenceService.transferValue(dto);
-		return ResponseEntity.status(200).body(null);
+	public ResponseEntity<TransferValueView> transferValue(@Valid @RequestBody TransferValueDTO dto) {
+		TransferValueView view = transferenceService.transferValue(dto);
+		return ResponseEntity.status(200).body(view);
 	}
 }

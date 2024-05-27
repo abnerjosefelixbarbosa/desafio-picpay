@@ -10,6 +10,7 @@ import com.org.backendjava.model.entity.User;
 import com.org.backendjava.model.entity.Wallet;
 import com.org.backendjava.repository.WalletRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -28,6 +29,15 @@ public class WalletService implements IWalletService {
 		wallet = this.walletRepository.save(wallet);
 		CreateWalletView view = new CreateWalletView(wallet);
 		return view;
+	}
+	
+	public Wallet findByUser(User user) {
+		return walletRepository.findByUser(user)
+				.orElseThrow(() -> new EntityNotFoundException("user not found"));
+	}
+	
+	public Wallet saveWallet(Wallet wallet) {
+		return walletRepository.save(wallet);
 	}
 	
 	private void validateCreateWallet(Wallet wallet) {

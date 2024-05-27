@@ -1,7 +1,8 @@
 package com.org.backendjava.interfaces;
 
-import com.org.backendjava.model.dto.TransferenceDTO;
+import com.org.backendjava.model.dto.TransferValueDTO;
+import com.org.backendjava.model.dto.TransferValueView;
 
 public interface ITransferenceService {
-	void transferValue(TransferenceDTO dto);
+	TransferValueView transferValue(TransferValueDTO dto);
 }
