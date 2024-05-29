@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.org.backendjava.interfaces.ITransferenceService;
 import com.org.backendjava.model.dto.TransferValueDTO;
 import com.org.backendjava.model.dto.TransferValueView;
+import com.org.backendjava.service.TransferenceService;
 
 import jakarta.validation.Valid;
 
@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/transferences")
 public class TransferenceController {
 	@Autowired
-	private ITransferenceService transferenceService;
+	private TransferenceService transferenceService;
 	
 	@PostMapping("/transfer-value")
 	@ResponseStatus(HttpStatus.OK)

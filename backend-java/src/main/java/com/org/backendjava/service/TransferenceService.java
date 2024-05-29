@@ -1,13 +1,11 @@
 package com.org.backendjava.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.backendjava.interfaces.ITransferenceService;
-import com.org.backendjava.interfaces.IUserService;
-import com.org.backendjava.interfaces.IWalletService;
 import com.org.backendjava.model.dto.TransferValueDTO;
 import com.org.backendjava.model.dto.TransferValueView;
 import com.org.backendjava.model.entity.Transference;
@@ -15,46 +13,57 @@ import com.org.backendjava.model.entity.User;
 import com.org.backendjava.model.entity.Wallet;
 import com.org.backendjava.model.enums.TypeUser;
 import com.org.backendjava.repository.TransferenceRepository;
+import com.org.backendjava.repository.UserRepository;
+import com.org.backendjava.repository.WalletRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
-public class TransferenceService implements ITransferenceService {
+public class TransferenceService {
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private WalletRepository walletRepository;
 	@Autowired
 	private TransferenceRepository transferenceRepository;
 	@Autowired
-	private IUserService userService;
-	@Autowired
-	private IWalletService walletService;
+	private AuthorizeService authorizeService;
 
 	@Transactional
 	public TransferValueView transferValue(TransferValueDTO dto) {
-		Transference transference = new Transference();
-		User payer = userService.findByIdOrDocment(dto.payer(), null);
-		User payee = userService.findByIdOrDocment(dto.payee(), null);
-		Wallet walletPayer = walletService.findByUser(payer);
-		Wallet walletPayee = walletService.findByUser(payee);
+		User payer = userRepository.findById(dto.payer())
+				.orElseThrow(() -> new EntityNotFoundException("pagador não encontrado"));
+		User payee = userRepository.findById(dto.payee())
+				.orElseThrow(() -> new EntityNotFoundException("beneficiario não encontrado"));
+		Wallet walletPayer = walletRepository.findByUser(payer)
+				.orElseThrow(() -> new EntityNotFoundException("carteira do pagador não encontrado"));
+		Wallet walletPayee = walletRepository.findByUser(payee)
+				.orElseThrow(() -> new EntityNotFoundException("carteira do beneficiario não encontrado"));
 		
-		transference.setPayee(payee);
-		transference.setPayer(payer);
-		transference.setValue(dto.value());
-		transference.setDateTime(LocalDateTime.now());
-		walletPayer.subtractBalance(dto.value());
-		walletPayee.addBalance(dto.value());
+		validateTransferValue(walletPayer.getBalance(), dto.value(), payer.getTypeUser());
 		
-		validateTransferValue(transference, payer, walletPayer);
+		walletPayer.setBalance(walletPayer.getBalance().subtract(dto.value()));
+		walletPayee.setBalance(walletPayee.getBalance().add(dto.value()));
+		Transference transference = new Transference(null, LocalDateTime.now(), dto.value(), payer, payee);
 		
+		authorizeService.authorization();
+		
+		walletRepository.save(walletPayer);
+		walletRepository.save(walletPayee);
 		transference = transferenceRepository.save(transference);
-		walletPayee = walletService.saveWallet(walletPayee);
-		walletPayer = walletService.saveWallet(walletPayer);
 		
-		return new TransferValueView(transference, walletPayee, walletPayer);
+		TransferValueView view = new TransferValueView(transference, walletPayer.getBalance(), walletPayee.getBalance());
+		return view;
 	}
 	
-	private void validateTransferValue(Transference transference, User payer, Wallet walletPayer) {
-		if (transference.getValue().longValue() > walletPayer.getBalance().longValue() || transference.getValue().longValue() == 0)
-			throw new RuntimeException("balance invalid");
-		if (payer.getTypeUser() == TypeUser.SHOPKEEPER)
-			throw new RuntimeException("user invalid");
+	
+	private void validateTransferValue(BigDecimal balancePayer, BigDecimal tranferenceValue, TypeUser typePayer) {
+		if (typePayer == TypeUser.MERCHANT)
+			throw new RuntimeException("mercador não pode fazer transferência");
+		if (tranferenceValue.longValue() == 0)
+			throw new RuntimeException("valor da transferência não pode ser 0");
+		if (tranferenceValue.longValue() > balancePayer.longValue())
+			throw new RuntimeException("saldo insuficiente");
 	}
 }

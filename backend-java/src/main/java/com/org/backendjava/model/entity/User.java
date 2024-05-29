@@ -2,9 +2,6 @@ package com.org.backendjava.model.entity;
 
 import java.io.Serializable;
 
-import org.springframework.beans.BeanUtils;
-
-import com.org.backendjava.model.dto.CreateUserDTO;
 import com.org.backendjava.model.enums.TypeUser;
 
 import jakarta.persistence.Column;
@@ -41,8 +38,4 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type_user", nullable = false)
 	private TypeUser typeUser;
-	
-	public User(CreateUserDTO dto) {
-		BeanUtils.copyProperties(dto, this);
-	}
 }

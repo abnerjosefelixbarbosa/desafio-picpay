@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import jakarta.validation.constraints.NotNull;
 
 public record TransferValueDTO(
-		@NotNull(message = "value invalid")
+		@NotNull(message = "valor invalido")
 		BigDecimal value,
-		@NotNull(message = "payer invalid")
+		@NotNull(message = "pagador invalido")
 		Long payer,
-		@NotNull(message = "payee invalid")
+		@NotNull(message = "benefíciario invalido")
 		Long payee
 ) {}
