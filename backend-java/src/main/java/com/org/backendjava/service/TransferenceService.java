@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.org.backendjava.interfaces.ITransferenceService;
+import com.org.backendjava.interfaces.IUserService;
+import com.org.backendjava.interfaces.IWalletService;
 import com.org.backendjava.model.dto.TransferValueDTO;
 import com.org.backendjava.model.dto.TransferValueView;
 import com.org.backendjava.model.entity.Transference;
@@ -13,18 +16,15 @@ import com.org.backendjava.model.entity.User;
 import com.org.backendjava.model.entity.Wallet;
 import com.org.backendjava.model.enums.TypeUser;
 import com.org.backendjava.repository.TransferenceRepository;
-import com.org.backendjava.repository.UserRepository;
-import com.org.backendjava.repository.WalletRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
-public class TransferenceService {
+public class TransferenceService implements ITransferenceService {
 	@Autowired
-	private UserRepository userRepository;
+	private IUserService userService;
 	@Autowired
-	private WalletRepository walletRepository;
+	private IWalletService walletService;
 	@Autowired
 	private TransferenceRepository transferenceRepository;
 	@Autowired
@@ -32,14 +32,10 @@ public class TransferenceService {
 
 	@Transactional
 	public TransferValueView transferValue(TransferValueDTO dto) {
-		User payer = userRepository.findById(dto.payer())
-				.orElseThrow(() -> new EntityNotFoundException("pagador não encontrado"));
-		User payee = userRepository.findById(dto.payee())
-				.orElseThrow(() -> new EntityNotFoundException("beneficiario não encontrado"));
-		Wallet walletPayer = walletRepository.findByUser(payer)
-				.orElseThrow(() -> new EntityNotFoundException("carteira do pagador não encontrado"));
-		Wallet walletPayee = walletRepository.findByUser(payee)
-				.orElseThrow(() -> new EntityNotFoundException("carteira do beneficiario não encontrado"));
+		User payer = userService.findById(dto.payer(), "pagador não encontrado");
+		User payee = userService.findById(dto.payee(), "beneficiario não encontrado");
+		Wallet walletPayer = walletService.findByUser(payer, "carteira do pagador não encontrado");
+		Wallet walletPayee = walletService.findByUser(payee, "carteira do beneficiario não encontrado");
 		
 		validateTransferValue(walletPayer.getBalance(), dto.value(), payer.getTypeUser());
 		
@@ -49,8 +45,8 @@ public class TransferenceService {
 		
 		authorizeService.authorization();
 		
-		walletRepository.save(walletPayer);
-		walletRepository.save(walletPayee);
+		walletService.saveWallet(walletPayer);
+		walletService.saveWallet(walletPayee);
 		transference = transferenceRepository.save(transference);
 		
 		TransferValueView view = new TransferValueView(transference, walletPayer.getBalance(), walletPayee.getBalance());

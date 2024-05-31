@@ -9,9 +9,8 @@ public class DocmentValidator implements ConstraintValidator<Docment, String> {
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		boolean result = false;
 		
-		if (isCPF(value) || isCNPJ(value)) {
+		if (isCPF(value) || isCNPJ(value))
 			result = true;
-		}
 		
 		return result;
 	}
@@ -22,6 +21,24 @@ public class DocmentValidator implements ConstraintValidator<Docment, String> {
 		
 		if (cnpj.length() != 14)
             return false;
+		if (cnpj.equals("11111111111111")) 
+			return false;
+		if (cnpj.equals("22222222222222")) 
+			return false;
+		if (cnpj.equals("33333333333333")) 
+			return false;
+		if (cnpj.equals("44444444444444")) 
+			return false;
+		if (cnpj.equals("55555555555555")) 
+			return false;
+		if (cnpj.equals("66666666666666")) 
+			return false;
+		if (cnpj.equals("77777777777777")) 
+			return false;
+		if (cnpj.equals("88888888888888")) 
+			return false;
+		if (cnpj.equals("99999999999999")) 
+			return false;
 		
 		int add = 0;
         int weight = 2;
@@ -61,6 +78,24 @@ public class DocmentValidator implements ConstraintValidator<Docment, String> {
 		cpf = cpf.replaceAll("\\D", "");
 		
 		if (cpf.length() != 11)
+			return false;
+		if (cpf.equals("11111111111"))
+			return false;
+		if (cpf.equals("22222222222"))
+			return false;
+		if (cpf.equals("33333333333"))
+			return false;
+		if (cpf.equals("44444444444"))
+			return false;
+		if (cpf.equals("55555555555"))
+			return false;
+		if (cpf.equals("66666666666"))
+			return false;
+		if (cpf.equals("77777777777"))
+			return false;
+		if (cpf.equals("88888888888"))
+			return false;
+		if (cpf.equals("99999999999"))
 			return false;
 		
 		int add = 0;
