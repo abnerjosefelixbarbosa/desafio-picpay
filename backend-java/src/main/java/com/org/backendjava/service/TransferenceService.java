@@ -4,11 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.org.backendjava.interfaces.ITransferenceService;
 import com.org.backendjava.interfaces.IUserService;
 import com.org.backendjava.interfaces.IWalletService;
+import com.org.backendjava.model.dto.ListTransferencesView;
 import com.org.backendjava.model.dto.TransferValueDTO;
 import com.org.backendjava.model.dto.TransferValueView;
 import com.org.backendjava.model.entity.Transference;
@@ -51,6 +54,14 @@ public class TransferenceService implements ITransferenceService {
 		
 		TransferValueView view = new TransferValueView(transference, walletPayer.getBalance(), walletPayee.getBalance());
 		return view;
+	}
+	
+	public Page<ListTransferencesView> listTransferencesByPayer(Long payer, Pageable pageable) {
+		User user = userService
+				.findById(payer, "pagador não encontrado");
+		return transferenceRepository
+				.findAllByPayer(user, pageable)
+				.map(ListTransferencesView::new);
 	}
 	
 	
