@@ -1,8 +1,8 @@
 -- COMMOM, MERCHANT
 
-INSERT INTO user_tb (full_name, docment, email, password, type_user) VALUES ('João Silva', '56826269074', 'joao98@example.com', '7596', 'COMMOM');
+INSERT INTO user_tb (full_name, docment, email, password, type_user) VALUES ('João Silva', '568.262.690-74', 'joao98@example.com', '7596', 'COMMOM');
 
-INSERT INTO user_tb (full_name, docment, email, password, type_user) VALUES ('Maria Oliveira', '40559124000126', 'mari56@example.com', '4512', 'MERCHANT');
+INSERT INTO user_tb (full_name, docment, email, password, type_user) VALUES ('Maria Oliveira', '64.558.145/0001-95', 'mari56@example.com', '4512', 'MERCHANT');
 
 INSERT INTO wallet_tb (balance, user_id) VALUES (1000, 1);
 

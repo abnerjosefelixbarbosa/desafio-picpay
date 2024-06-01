@@ -2,6 +2,7 @@ package com.org.backendjava.model.entity;
 
 import java.io.Serializable;
 
+import com.org.backendjava.model.dto.CreateWalletDTO;
 import com.org.backendjava.model.enums.TypeUser;
 
 import jakarta.persistence.Column;
@@ -38,4 +39,15 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type_user", nullable = false)
 	private TypeUser typeUser;
+	
+    public User(CreateWalletDTO dto) {
+    	this (
+    			null,
+    			dto.fullNameUser(),
+    			dto.docmentUser(),
+    			dto.emailUser(),
+    			dto.passwordUser(),
+    			dto.typeUser()
+    	);
+	}
 }

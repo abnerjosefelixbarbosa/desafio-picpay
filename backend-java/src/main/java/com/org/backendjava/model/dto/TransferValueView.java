@@ -16,7 +16,7 @@ public record TransferValueView(
 ) {
 	public TransferValueView(Transference transference,  BigDecimal payerBalance, BigDecimal payeeBalance) {
 		this(
-				transference.getId(),
+		        transference.getId(), 
 				transference.getDateTime(),
 				transference.getTransferenceValue(),
 				transference.getPayer(),

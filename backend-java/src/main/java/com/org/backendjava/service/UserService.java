@@ -22,4 +22,9 @@ public class UserService implements IUserService {
 		return userRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException(message));
 	}
+	
+	public boolean existsByEmailOrDocmentOrPassword(User user) {
+		return userRepository
+				.existsByEmailOrDocmentOrPassword(user.getEmail(), user.getDocment(), user.getPassword());
+	}
 }
