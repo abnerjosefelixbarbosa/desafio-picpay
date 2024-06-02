@@ -39,11 +39,13 @@ public class WalletService implements IWalletService {
 	}
 	
 	public Wallet saveWallet(Wallet wallet) {
-		return walletRepository.save(wallet);
+		return walletRepository
+				.save(wallet);
 	}
 
 	public Wallet findByUser(User user, String message) {
-		return walletRepository.findByUser(user)
+		return walletRepository
+				.findByUser(user)
 				.orElseThrow(() -> new EntityNotFoundException(message));
 	}
 	
