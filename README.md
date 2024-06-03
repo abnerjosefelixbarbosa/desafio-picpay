@@ -29,7 +29,7 @@ Desafio simplificado picpay.
 
 ## End Points
 
-### Transference
+### Transferences
 
 ```JSON
 POST
@@ -73,8 +73,16 @@ typeUser: "COMMOM" || "MERCHANT"
 
 - Copie o repositório.
 - Importe o projeto em uma IDE Java.
-- Acesse o sweeger [Documento](http://localhost:8080/swagger-ui/index.html) ou use um plataforma para testa API.
+- Execute o projeto.
+- Acesse o [documento da API](http://localhost:8080/swagger-ui/index.html) ou use um plataforma para testa API.
 
-```PRONPT
-git clone 
+```bash
+git clone https://github.com/abnerjosefelixbarbosa/desafio-picpay.git
 ```
+
+# Autor
+
+Abner José Felix Barbosa.
+
+[Link do linkedin](https://www.linkedin.com/in/abner-jose-feliz-barbosa/).
+
