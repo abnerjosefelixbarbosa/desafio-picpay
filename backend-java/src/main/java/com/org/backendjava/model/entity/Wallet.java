@@ -22,11 +22,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Wallet implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    @Column(name = "balance", nullable = false)
+	@Column(name = "balance", nullable = false)
 	private BigDecimal balance;
 	@OneToOne
 	@JoinColumn(name = "user_id", nullable = false, unique = true)

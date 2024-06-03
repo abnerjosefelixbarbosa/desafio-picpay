@@ -16,26 +16,20 @@ import jakarta.persistence.EntityNotFoundException;
 public class UserService implements IUserService {
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	public User saveUser(User user) {
-		return userRepository
-				.save(user);
+		return userRepository.save(user);
 	}
-	
+
 	public User findById(Long id, String message) {
-		return userRepository
-				.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException(message));
+		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(message));
 	}
-	
+
 	public Page<ListUserView> listUser(Pageable pageable) {
-		return userRepository
-				.findAll(pageable)
-				.map(ListUserView::new);
+		return userRepository.findAll(pageable).map(ListUserView::new);
 	}
-	
+
 	public boolean existsByEmailOrDocmentOrPassword(User user) {
-		return userRepository
-				.existsByEmailOrDocmentOrPassword(user.getEmail(), user.getDocment(), user.getPassword());
+		return userRepository.existsByEmailOrDocmentOrPassword(user.getEmail(), user.getDocment(), user.getPassword());
 	}
 }

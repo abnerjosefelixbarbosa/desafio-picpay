@@ -25,17 +25,18 @@ import jakarta.validation.Valid;
 public class TransferenceController {
 	@Autowired
 	private ITransferenceService transferenceService;
-	
+
 	@PostMapping("/transfer-value")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<TransferValueView> transferValue(@Valid @RequestBody TransferValueDTO dto) {
 		TransferValueView view = transferenceService.transferValue(dto);
 		return ResponseEntity.status(200).body(view);
 	}
-	
-	@GetMapping("/list-transference")
+
+	@GetMapping("/list-transference-by-player")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Page<ListTransferencesView>> listTransferencesByPayer(@RequestParam Long payer, Pageable pageable) {
+	public ResponseEntity<Page<ListTransferencesView>> listTransferencesByPayer(@RequestParam Long payer,
+			Pageable pageable) {
 		Page<ListTransferencesView> view = transferenceService.listTransferencesByPayer(payer, pageable);
 		return ResponseEntity.status(200).body(view);
 	}

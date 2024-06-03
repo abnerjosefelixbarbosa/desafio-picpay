@@ -9,5 +9,6 @@ import com.org.backendjava.model.dto.TransferValueView;
 
 public interface ITransferenceService {
 	TransferValueView transferValue(TransferValueDTO dto);
+
 	Page<ListTransferencesView> listTransferencesByPayer(Long payer, Pageable pageable);
 }

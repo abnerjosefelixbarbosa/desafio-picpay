@@ -39,32 +39,29 @@ public class TransferenceService implements ITransferenceService {
 		User payee = userService.findById(dto.payee(), "beneficiario não encontrado");
 		Wallet walletPayer = walletService.findByUser(payer, "carteira do pagador não encontrado");
 		Wallet walletPayee = walletService.findByUser(payee, "carteira do beneficiario não encontrado");
-		
+
 		validateTransferValue(walletPayer.getBalance(), dto.value(), payer.getTypeUser());
-		
+
 		walletPayer.setBalance(walletPayer.getBalance().subtract(dto.value()));
 		walletPayee.setBalance(walletPayee.getBalance().add(dto.value()));
 		Transference transference = new Transference(null, LocalDateTime.now(), dto.value(), payer, payee);
-		
+
 		authorizeService.authorization();
-		
+
 		walletService.saveWallet(walletPayer);
 		walletService.saveWallet(walletPayee);
 		transference = transferenceRepository.save(transference);
-		
-		TransferValueView view = new TransferValueView(transference, walletPayer.getBalance(), walletPayee.getBalance());
+
+		TransferValueView view = new TransferValueView(transference, walletPayer.getBalance(),
+				walletPayee.getBalance());
 		return view;
 	}
-	
+
 	public Page<ListTransferencesView> listTransferencesByPayer(Long payer, Pageable pageable) {
-		User user = userService
-				.findById(payer, "pagador não encontrado");
-		return transferenceRepository
-				.findAllByPayer(user, pageable)
-				.map(ListTransferencesView::new);
+		User user = userService.findById(payer, "pagador não encontrado");
+		return transferenceRepository.findAllByPayer(user, pageable).map(ListTransferencesView::new);
 	}
-	
-	
+
 	private void validateTransferValue(BigDecimal balancePayer, BigDecimal tranferenceValue, TypeUser typePayer) {
 		if (typePayer == TypeUser.MERCHANT)
 			throw new RuntimeException("mercador não pode fazer transferência");

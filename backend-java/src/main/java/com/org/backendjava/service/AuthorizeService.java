@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class AuthorizeService {
 	public void authorization() {
 		boolean response = new Random().nextBoolean();
-		
+
 		if (!response)
 			throw new RuntimeException("não autorizado");
 	}

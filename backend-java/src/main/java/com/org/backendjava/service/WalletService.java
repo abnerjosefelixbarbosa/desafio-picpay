@@ -21,37 +21,34 @@ public class WalletService implements IWalletService {
 	private WalletRepository walletRepository;
 	@Autowired
 	private IUserService userService;
-	
+
 	public CreateWalletView createWallet(CreateWalletDTO dto) {
 		User user = new User(dto);
 		Wallet wallet = new Wallet();
-		
+
 		validateCreateWallet(user);
-		
+
 		user = userService.saveUser(user);
 		wallet.setBalance(BigDecimal.valueOf(0));
 		wallet.setUser(user);
 		wallet = walletRepository.save(wallet);
-		
+
 		CreateWalletView view = new CreateWalletView(wallet.getId(), wallet.getBalance(), user);
-		
+
 		return view;
 	}
-	
+
 	public Wallet saveWallet(Wallet wallet) {
-		return walletRepository
-				.save(wallet);
+		return walletRepository.save(wallet);
 	}
 
 	public Wallet findByUser(User user, String message) {
-		return walletRepository
-				.findByUser(user)
-				.orElseThrow(() -> new EntityNotFoundException(message));
+		return walletRepository.findByUser(user).orElseThrow(() -> new EntityNotFoundException(message));
 	}
-	
+
 	private void validateCreateWallet(User user) {
 		boolean response = userService.existsByEmailOrDocmentOrPassword(user);
-		
+
 		if (response)
 			throw new RuntimeException("email, documento ou senha existem");
 	}

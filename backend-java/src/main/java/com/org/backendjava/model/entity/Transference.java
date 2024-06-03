@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Transference implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,9 +32,9 @@ public class Transference implements Serializable {
 	@Column(name = "transference_value")
 	private BigDecimal transferenceValue;
 	@ManyToOne
-	@JoinColumn(name = "payer_id")
+	@JoinColumn(name = "payer_id", nullable = false)
 	private User payer;
 	@ManyToOne
-	@JoinColumn(name = "payee_id")
+	@JoinColumn(name = "payee_id", nullable = false)
 	private User payee;
 }
