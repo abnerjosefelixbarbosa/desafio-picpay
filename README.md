@@ -26,3 +26,63 @@ Desafio simplificado picpay.
 - H2 DataBase.
 - Swwgger.
 - Validation.
+
+## End Points
+
+### Transferences
+
+```JSON
+POST
+api/transferences/transfer-value
+Content-Type: application/json
+
+{
+  "value": 0,
+  "payer": 0,
+  "payee": 0
+}
+
+GET
+/api/transferences/list-transference-by-player?payer=1&&number=0&&size=5
+```
+### Users
+
+```JSON
+GET
+/api/users/list-user
+```
+
+### Wallets
+
+```JSON
+POST
+/api/wallets/create-wallet
+Content-Type: application/json
+typeUser: "COMMOM" || "MERCHANT"
+
+{
+  "fullNameUser": "",
+	"docmentUser": "",
+	"emailUser": "",
+	"passwordUser": "",
+	"typeUser": ""
+}
+```
+
+## Execução
+
+- Copie o repositório.
+- Importe o projeto em uma IDE Java.
+- Execute o projeto.
+- Acesse o [documento da API](http://localhost:8080/swagger-ui/index.html) ou use um plataforma para testa API.
+
+```bash
+git clone https://github.com/abnerjosefelixbarbosa/desafio-picpay.git
+```
+
+# Autor
+
+Abner José Felix Barbosa.
+
+[Link do linkedin](https://www.linkedin.com/in/abner-jose-feliz-barbosa/).
+
