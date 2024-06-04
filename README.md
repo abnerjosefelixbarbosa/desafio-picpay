@@ -20,6 +20,7 @@ Desafio simplificado picpay.
 ## Tecnologias
 
 - Java 17.
+- Spring Boot.
 - Lombok.
 - SOLID.
 - MVC.
@@ -84,5 +85,6 @@ git clone https://github.com/abnerjosefelixbarbosa/desafio-picpay.git
 
 Abner José Felix Barbosa.
 
-[Link do linkedin](https://www.linkedin.com/in/abner-jose-feliz-barbosa/).
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abner-jose-feliz-barbosa/)
+[![Gmail](https://img.shields.io/badge/Gmail-333333?style=for-the-badge&logo=gmail&logoColor=red)](abnerbarbosa95@gmail.com)
 
