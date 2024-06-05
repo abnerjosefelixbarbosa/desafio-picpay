@@ -75,7 +75,7 @@ typeUser: "COMMOM" || "MERCHANT"
 - Copie o repositório.
 - Importe o projeto em uma IDE Java.
 - Execute o projeto.
-- Acesse o [documento da API](http://localhost:8080/swagger-ui/index.html) ou use um plataforma para testa API.
+- Acesse o [documento da API](http://localhost:8080/swagger-ui/index.html) ou use um plataforma para teste de API.
 
 ```bash
 git clone https://github.com/abnerjosefelixbarbosa/desafio-picpay.git
