@@ -46,6 +46,7 @@ Content-Type: application/json
 GET
 /api/transferences/list-transference-by-player?payer=1&&number=0&&size=5
 ```
+
 ### Users
 
 ```JSON
