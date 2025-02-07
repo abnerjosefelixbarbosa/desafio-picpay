@@ -4,6 +4,10 @@
 
 Desafio simplificado picpay.
 
+## Modelo
+
+![Image](https://github.com/user-attachments/assets/db68621a-58cb-42b3-8714-9cada75eef9e)
+
 ## Requisitos
 
 - Para ambos tipos de usuário, precisamos do Nome Completo, CPF, e-mail e Senha. CPF/CNPJ e e-mails devem ser únicos no sistema. Sendo assim, seu sistema deve permitir apenas um cadastro com o mesmo CPF ou endereço de e-mail.
